@@ -1,0 +1,226 @@
+.nav-bar {
+    position: fixed;
+
+    display: block;
+    width: 20%;
+    height: 100vh ;
+    background-color: #000000;
+    color: #fff;           
+    line-height: 50px;
+    text-align: center;
+
+    top: 0;
+    left: 0;
+}
+
+
+
+.index-body, .watchlist-body {
+    display: flex;
+    flex-direction: column;
+    background-color: #1B1B1B;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image {
+    width: 40px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.create-watchlist-button {
+    display: block;
+    width: 200px;
+    height: 40px;
+    background-color: #F33F3F;
+    color: #000000;           
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 5px;
+
+}
+
+.search-bar {
+    display: block;
+    width: 200px;
+    height: 30px;
+    margin: 10px auto;
+    padding: 5px;
+
+    border-radius: 10px;
+}
+
+.home-button {
+    display: block;
+    width: 100px;
+    height: 30px;
+    margin: 20px auto;
+
+    justify-content: center;
+
+    color: #ffffff;
+}
+
+
+.divider {
+    justify-content: center;
+    width: 70%;
+    height: 1px;
+    background-color: #ffffff;
+    margin: 20px auto;
+}
+.home-image {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    padding: 30px 0;
+}
+
+.main-content, .watchlist-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    justify-content: center;
+}
+
+.welcome-container {
+    width: 50%;
+    height: auto;
+    display: block;
+
+    border: 1px solid #F33F3F;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #2e2d2d;
+    margin-bottom: 10px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.search-input {
+    width: 300px;
+    height: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-button {
+    width: 80px;
+    height: 30px;
+    background-color: #F33F3F;
+    color: #000000;           
+    text-align: center;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.ribbon-icon {
+    width: 15px;
+    height: 20px;
+    margin: 0 5px;
+}
+
+.loading-msg {
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+}
+
+.btn-watchlist {
+    width: 100px;
+    height: 30px;         
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.movie-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 325px;
+    background-color: #2e2d2d;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.movie-poster {
+    width: 175px;
+    height: 225px;
+    border-radius: 5px;
+}
+
+.movie-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.movie-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.release-date, .rating {
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.movie-section-header, .watchlist-section-header {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    justify-content: center;
+    margin-left: 20%;
+}
+
+.watchlist-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 20px;
+}
+
+.watchlist-header {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    left: 20%;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8"/>
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0"/>
+        <title> Movie Watch List Hub </title>
+        <link rel = "stylesheet" href="css/style.css"/>
+        <script type = "module" src = "js/app.js"></script>
+
+    </head>
+    <body class = "index-body">
+        <!--Navigation bar-->
+        <nav class = "nav-bar">
+            <!--Logo-->
+            <div class ="logo">
+                <img src = "assets/logo.jpg" alt ="logo" class = "logo-image"/>
+                <h1> Watch List Hub </h1>
+            </div>
+            <input type = "text" placeholder = "Search" class="search-bar"/>
+            <a href = "index.html" class = "home-button">
+                <img src = "assets/Home.png" alt = "home-logo" class = "home-image"/>
+                Home 
+            </a>
+            <a href = "createwatchlist.html" class = "create-watchlist-button">
+                + Create Watch List
+            </a>
+            <div class = "divider"></div>
+            <div class = "watchlist-header"> My Watch List </div>
+            <a href = "watchlist.html" class = "watchlist-button"> Watch List </a>
+        </nav>
+        
+        <header class = "hero-section">
+            <div class = "welcome-container">
+                <h1> Welcome to Movie Watch Hub </h1>
+                <p> Browse movies, add them to watchlists and share them with friends. </p>
+                <p>Click <img src = "assets/ribbon.png" alt = "ribbon" class = "ribbon-icon"/> to create your first watchlist!</p>
+                <p> Get started by creating a new watchlist or browsing our collection of popular movies. </p>
+            </div>
+            <div class = "search-box">
+                <input type = "text" id = "search-input" placeholder = "Search for movies..." class = "search-input"/>
+                <button class = "search-button" id = "search-button"> search </button>
+            </div>
+        </header>
+        
+        
+
+        <main class ="main-content">
+            <div class = "movie-section-header">
+                <h2> Popular Movies Right Now </h2>
+            </div>
+            <div class = "status-container" id = "status-container"></div>
+            <div class = "movie-list" id = "movie-grid">
+                <!-- Movie items will be dynamically added here -->
+            </div>
+        </main>
+    </body>
+</html>
