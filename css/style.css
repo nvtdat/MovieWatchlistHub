@@ -8,9 +8,9 @@
     color: #fff;           
     line-height: 50px;
     text-align: center;
-
     top: 0;
     left: 0;
+    font-family: Arial, sans-serif;
 }
 
 
@@ -43,6 +43,9 @@
     margin: 20px auto;
     border-radius: 5px;
 
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+
 }
 
 .search-bar {
@@ -53,6 +56,10 @@
     padding: 5px;
 
     border-radius: 10px;
+    background-color: #1a1a1a;
+    border: 1px solid #444444;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
 }
 
 .home-button {
@@ -62,8 +69,10 @@
     margin: 20px auto;
 
     justify-content: center;
-
     color: #ffffff;
+    font-family: Arial, sans-serif;
+
+    text-decoration: none;
 }
 
 
@@ -73,6 +82,7 @@
     height: 1px;
     background-color: #ffffff;
     margin: 20px auto;
+    font-family: Arial, sans-serif;
 }
 .home-image {
     width: 20px;
@@ -87,13 +97,7 @@
     justify-content: center;
     color: #ffffff;
     padding: 30px 0;
-}
-
-.main-content, .watchlist-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;   
-    justify-content: center;
+    font-family: Arial, sans-serif;
 }
 
 .welcome-container {
@@ -121,6 +125,10 @@
     padding: 5px;
     border-radius: 5px;
     border: none;
+
+    background-color: #1a1a1a;
+    border: 1px solid #444444;
+    color: #ffffff;
 }
 
 .search-button {
@@ -143,6 +151,7 @@
     color: #ffffff;
     font-size: 18px;
     text-align: center;
+    font-family: Arial, sans-serif;
 }
 
 .btn-watchlist {
@@ -184,6 +193,7 @@
     align-items: center;
     justify-content: center;
     color: #ffffff;
+    font-family: Arial, sans-serif;
 }
 
 .movie-title {
@@ -197,10 +207,11 @@
     margin-bottom: 3px;
 }
 
-.movie-section-header, .watchlist-section-header {
+.movie-section-header {
     color: #ffffff;
     font-size: 24px;
     font-weight: bold;
+    font-family: Arial, sans-serif;
 }
 
 .main-content {
@@ -223,4 +234,274 @@
     font-size: 24px;
     font-weight: bold;
     left: 20%;
+    font-family: Arial, sans-serif;
+}
+
+.watchlist-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    margin-left: 20%;
+}
+
+.watchlist-section-header {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.watchlist-hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20%;
+}
+
+.create-watchlist-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.create-watchlist-section-header {
+    COLOR: #FFFFFF;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.create-watchlist-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    justify-content: center;
+}
+
+.create-button {
+    width: 100px;
+    height: 30px;         
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #F33F3F;
+    color: #000000;           
+    text-align: center;
+}
+
+.remove-btn {
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: #F33F3F;
+    color: #000000;
+    cursor: pointer;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.trash-icon {
+    width: 20px;
+    height: 20px;
+
+}
+
+.watchlist-form {
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px; /* Độ rộng vừa phải tương đương hình mẫu */
+    margin: 10px auto;
+    font-family: Arial, sans-serif;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.watchlist-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 16px;
+}
+.watchlist-form input[type="text"], .watchlist-form textarea {
+    width: 100%;
+    background-color: #121212; /* Nền ô nhập tối hơn nền form */
+    border: 1px solid #444444;    /* Viền mỏng màu xám */
+    border-radius: 6px;           /* Bo góc nhẹ */
+    padding: 12px;
+    color: #ffffff;               /* Chữ gõ vào màu trắng */
+    font-size: 15px;
+    box-sizing: border-box;       /* Đảm bảo width 100% không bị tràn viền */
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.watchlist-form textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.watchlist-form input:focus,
+.watchlist-form textarea:focus {
+    border-color: #e50914; /* Viền chuyển đỏ nhẹ khi focus */
+}
+
+.error-msg {
+    color: #ffffff;
+    font-size: 15px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.movie-details-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}       
+
+.movie-details-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.add-watchlist-btn {
+    width: 150px;
+    height: 30px;
+    background-color: #F33F3F;
+    color: #000000;           
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    width: min(90vw, 420px);
+    background: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #f33f3f;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    font-family: Arial, sans-serif;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: #f33f3f;
+    color: #000000;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.watchlist-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.watchlist-select-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #444444;
+    border-radius: 8px;
+    background: #2e2d2d;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.watchlist-select-btn:hover {
+    border-color: #f33f3f;
+    transform: translateY(-1px);
+}
+
+.watchlist-select-btn:focus {
+    outline: 2px solid #f33f3f;
+    outline-offset: 2px;
+}
+
+.movie-details-poster {
+    width: 300px;
+    height: 350px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.movies-details-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-details-card {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 320px;
+    height: 350px;
+    background-color: #2e2d2d;
+    border-radius: 10px;
+    margin: 20px auto;
+    gap: 30px;
+}
+
+.movie-details-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+}
+
+.watchlist-name {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-decoration: none;
 }

@@ -21,11 +21,9 @@
                 <img src = "assets/Home.png" alt = "home-logo" class = "home-image"/>
                 Home 
             </a>
-            <!-- New code added for create watchlist button -->
             <a href = "createwatchlist.html" class = "create-watchlist-button">
                 + Create Watch List
             </a>
-
             <div class = "divider"></div>
             <div class = "watchlist-header"> My Watch List </div>
             <div id = "created-watchlist">
@@ -33,25 +31,15 @@
             </div>
         </nav>
 
-        <main class = "create-watchlist-content">
-            <div class = "create-watchlist-section-header">
-                <h2> Create a New Watch List </h2>
-                <p> Give your watchlist a name and start adding movies to it! </p>
+        <main class = "movie-details-content">
+            <div class = "movie-details-section-header">
+                <h2> Movie Details </h2>
+                <p> Explore detailed information about the movie, including synopsis, cast, and more. </p>
             </div>
 
-            <form id="create-watchlist-form" class="watchlist-form">
-                <div class="form-group">
-                    <label for="watchlist-name">Name</label>
-                    <input type="text" id="watchlist-name" required placeholder="Enter watchlist name...">
-                </div>
-
-                <div class="form-group">
-                    <label for="watchlist-desc">Description</label>
-                    <textarea id="watchlist-desc" rows="6" placeholder="Enter description..."></textarea>
-                </div>
-
-                <button type="submit" class="create-button">Create</button>
-            </form>
+            <div id = "movie-details-container" class = "movie-details-container">
+                <!-- Movie details will be dynamically added here -->
+            </div>
         </main>
         
     </body>

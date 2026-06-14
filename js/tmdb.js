@@ -45,3 +45,21 @@ export async function getPopularMovies() {
         return [];
     }
 }
+
+//Hàm lấy chi tiết phim theo ID để hiển thị ở trang moviedetails
+export async function getMovieDetails(movieId) {
+    if (!movieId) return null;
+
+    try {
+        const response = await fetch(`${BASE_URL}/movie/${movieId}?language=en-US`, options);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+    }
+    catch (error) {
+        console.error('Error fetching movie details: ', error);
+        return null;
+    }
+}
