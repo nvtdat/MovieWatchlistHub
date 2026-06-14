@@ -1,409 +1,339 @@
-.nav-bar {
-    position: fixed;
-
-    display: block;
-    width: 20%;
-    height: 100vh ;
-    background-color: #000000;
-    color: #fff;           
-    line-height: 50px;
-    text-align: center;
-    top: 0;
-    left: 0;
-    font-family: Arial, sans-serif;
+/* ==========================================
+   1. ĐỊNH DẠNG CHUNG & LAYOUT CHÍNH
+   ========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
+/* Đảm bảo toàn bộ trang web dùng chung font chuẩn và cuộn mượt */
+body, .index-body, .watchlist-body {
+    background-color: #111111; /* Đen sẫm hơn để tăng độ tương phản */
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    min-height: 100vh;
+}
 
-
-.index-body, .watchlist-body {
+/* Sidebar cố định bên trái - Làm gọn gàng và hiện đại hơn */
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 21%;
+    height: 100vh;
+    background-color: #0a0a0a; /* Nền tối sâu */
+    border-right: 1px solid #222222; /* Thêm đường viền mảnh tinh tế */
+    padding: 30px 15px;
+    z-index: 100;
     display: flex;
     flex-direction: column;
-    background-color: #1B1B1B;
+    align-items: center;
+}
+
+/* Các vùng nội dung chính bên phải - Đồng bộ lề 20% */
+.main-content, .watchlist-content, .watchlist-hero-section {
+    margin-left: 20%;
+    padding: 40px;
+    width: 80%;
 }
 
 .logo {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 .logo-image {
-    width: 40px;
-    height: 50px;
-    margin-right: 10px;
+    width: 35px;
+    height: auto;
+    margin-right: 12px;
 }
 
-.create-watchlist-button {
-    display: block;
-    width: 200px;
-    height: 40px;
-    background-color: #F33F3F;
-    color: #000000;           
-    text-align: center;
-    margin: 20px auto;
-    border-radius: 5px;
-
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-
-}
-
+/* Ô Tìm kiếm bên Sidebar */
 .search-bar {
-    display: block;
-    width: 200px;
-    height: 30px;
-    margin: 10px auto;
-    padding: 5px;
-
-    border-radius: 10px;
+    width: 100%;
+    max-width: 180px;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 8px;
     background-color: #1a1a1a;
-    border: 1px solid #444444;
+    border: 1px solid #333333;
     color: #ffffff;
-    font-family: Arial, sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+}
+.search-bar:focus {
+    border-color: #F33F3F;
 }
 
+/* Nút Home tinh tế hơn */
 .home-button {
-    display: block;
-    width: 100px;
-    height: 30px;
-    margin: 20px auto;
-
-    justify-content: center;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-
-    text-decoration: none;
-}
-
-
-.divider {
-    justify-content: center;
-    width: 70%;
-    height: 1px;
-    background-color: #ffffff;
-    margin: 20px auto;
-    font-family: Arial, sans-serif;
-}
-.home-image {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-.hero-section {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    padding: 30px 0;
-    font-family: Arial, sans-serif;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 20px 0;
+    width: 100%;
+    transition: color 0.2s;
+}
+.home-button:hover {
+    color: #F33F3F;
+}
+.home-image {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
 }
 
-.welcome-container {
-    width: 50%;
-    height: auto;
+/* Nút tạo Watchlist dạng viên thuốc nổi bật */
+.create-watchlist-button {
     display: block;
+    width: 100%;
+    max-width: 180px;
+    height: 42px;
+    line-height: 42px;
+    background-color: #F33F3F;
+    color: #000000;          
+    text-align: center;
+    border-radius: 20px; /* Bo tròn hẳn nhìn sẽ rất "nghệ" */
+    font-weight: bold;
+    text-decoration: none;
+    margin: 15px auto;
+    transition: background-color 0.2s, transform 0.1s;
+}
+.create-watchlist-button:hover {
+    background-color: #d62c2c;
+    transform: translateY(-1px);
+}
 
-    border: 1px solid #F33F3F;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #2e2d2d;
-    margin-bottom: 10px;
+.divider {
+    width: 80%;
+    height: 1px;
+    background-color: #363636; /* Giảm độ sáng của vạch ngăn để không bị thô */
+    margin: 20px auto;
+}
+
+/* Danh sách tên watchlist ở sidebar */
+.watchlist-name {
+    display: block;
+    color: #aaaaaa;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 12px 0;
+    transition: color 0.2s;
+}
+.watchlist-name:hover {
+    color: #ffffff;
+}
+
+/* ==========================================
+   3. HERO SECTION & THANH SEARCH CHÍNH (GIỮA MÀN HÌNH)
+   ========================================== */
+.hero-section {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 40px;
+}
+
+/* Khung Welcome bọc viền đỏ */
+.welcome-container {
+    width: 60%;
+    background-color: #1a1a1a;
+    border: 1px solid #F33F3F; /* Làm mờ viền đỏ một chút để dịu mắt */
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+
+    margin-left: 30%;
+    margin-top: 20px;
 }
 
 .search-box {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-left: 30%;
 }
 
 .search-input {
-    width: 300px;
-    height: 20px;
-    padding: 5px;
-    border-radius: 5px;
-    border: none;
-
-    background-color: #1a1a1a;
-    border: 1px solid #444444;
+    flex: 1; /* Cho ô input tự giãn rộng hết cỡ khung */
+    height: 40px;
+    padding: 0 15px;
+    border-radius: 8px 0 0 8px; /* Bo góc trái */
+    background-color: #111111;
+    border: 1px solid #333333;
+    border-right: none;
     color: #ffffff;
+    font-size: 15px;
+
+
+}
+.search-input:focus {
+    border-color: #F33F3F;
+    outline: none;
 }
 
 .search-button {
-    width: 80px;
-    height: 30px;
-    background-color: #F33F3F;
-    color: #000000;           
-    text-align: center;
-    margin-left: 10px;
-    border-radius: 5px;
-}
-
-.ribbon-icon {
-    width: 15px;
-    height: 20px;
-    margin: 0 5px;
-}
-
-.loading-msg {
-    color: #ffffff;
-    font-size: 18px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
-
-.btn-watchlist {
     width: 100px;
-    height: 30px;         
-    margin-top: 10px;
-    border-radius: 5px;
+    height: 40px;
+    background-color: #F33F3F;
+    color: #000000;          
+    font-weight: bold;
+    border: none;
+    border-radius: 0 8px 8px 0; /* Bo góc phải */
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+.search-button:hover {
+    background-color: #d62c2c;
 }
 
+.movie-section-header, .watchlist-section-header, .watchlist-header {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    align-self: flex-start; /* Giữ tiêu đề luôn thẳng hàng bên trái */
+}
+
+/* Thay thế Flex bằng CSS Grid để các Card phim tự động thẳng hàng tăm tắp */
+.movie-list, .watchlist-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Card phim thiết kế đổ bóng và hiệu ứng bay lên khi hover */
 .movie-card {
+    background-color: #1a1a1a;
+    border: 1px solid #252525;
+    border-radius: 12px;
+    padding: 12px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;   
+    justify-content: space-between; 
     align-items: center;
-    justify-content: center;
-    width: 250px;
-    height: 325px;
-    background-color: #2e2d2d;
-    border-radius: 10px;
-    margin: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.movie-card:hover {
+    transform: translateY(-5px); /* Bay lên nhẹ khi rê chuột */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+    border-color: #333333;
 }
 
-.movie-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+/* Bọc ảnh Poster để xử lý căn tỷ lệ */
+.poster-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .movie-poster {
-    width: 175px;
-    height: 225px;
-    border-radius: 5px;
+    width: 100%;
+    height: 280px; /* Tăng chiều cao một chút cho đúng tỷ lệ poster chuẩn */
+    object-fit: cover;
+    display: block;
 }
 
+/* Phần chữ bên dưới ảnh */
 .movie-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
+    width: 100%;
+    padding: 12px 4px 4px 4px;
+    text-align: center;
 }
 
 .movie-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.movie-title-link {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.movie-title-link:hover {
+    color: #F33F3F;
 }
 
 .release-date, .rating {
-    font-size: 14px;
-    margin-bottom: 3px;
-}
-
-.movie-section-header {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-}
-
-.main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;   
-    justify-content: center;
-    margin-left: 20%;
-}
-
-.watchlist-container {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   gap: 20px;
-}
-
-.watchlist-header {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    left: 20%;
-    font-family: Arial, sans-serif;
-}
-
-.watchlist-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;   
-    margin-left: 20%;
-}
-
-.watchlist-section-header {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-}
-
-.watchlist-hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 20%;
-}
-
-.create-watchlist-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-}
-
-.create-watchlist-section-header {
-    COLOR: #FFFFFF;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-}
-
-.create-watchlist-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;   
-    justify-content: center;
-}
-
-.create-button {
-    width: 100px;
-    height: 30px;         
-    margin-top: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #F33F3F;
-    color: #000000;           
-    text-align: center;
-}
-
-.remove-btn {
-    margin-top: 10px;
-    width: 20px;
-    height: 20px;
-    background-color: #F33F3F;
-    color: #000000;
-    cursor: pointer;
-    border-radius: 5px;
-    justify-content: center;
-    align-items: center;
-}
-
-.trash-icon {
-    width: 20px;
-    height: 20px;
-
-}
-
-.watchlist-form {
-    background-color: #1a1a1a;
-    padding: 10px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 800px; /* Độ rộng vừa phải tương đương hình mẫu */
-    margin: 10px auto;
-    font-family: Arial, sans-serif;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.watchlist-form label {
+    font-size: 13px;
+    color: #999999; /* Làm chữ phụ mờ xuống cho sang */
+    margin-bottom: 4px;
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+}
+
+/* ==========================================
+   5. CÁC NÚT BẤM CHỨC NĂNG (REMOVE, INTERACTION)
+   ========================================== */
+/* Nút bấm Lưu/Xóa chung định dạng */
+.btn-watchlist, .create-button {
+    background-color: #222222;
+    border: 1px solid #333333;
     color: #ffffff;
-    font-size: 16px;
-}
-.watchlist-form input[type="text"], .watchlist-form textarea {
-    width: 100%;
-    background-color: #121212; /* Nền ô nhập tối hơn nền form */
-    border: 1px solid #444444;    /* Viền mỏng màu xám */
-    border-radius: 6px;           /* Bo góc nhẹ */
-    padding: 12px;
-    color: #ffffff;               /* Chữ gõ vào màu trắng */
-    font-size: 15px;
-    box-sizing: border-box;       /* Đảm bảo width 100% không bị tràn viền */
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-.watchlist-form textarea {
-    resize: vertical;
-    height: 100px;
-}
-
-.watchlist-form input:focus,
-.watchlist-form textarea:focus {
-    border-color: #e50914; /* Viền chuyển đỏ nhẹ khi focus */
-}
-
-.error-msg {
-    color: #ffffff;
-    font-size: 15px;
-    margin-top: 5px;
-    font-weight: bold;
-}
-
-.movie-details-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
-    font-family: Arial, sans-serif;
-}       
-
-.movie-details-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-}
-
-.add-watchlist-btn {
-    width: 150px;
-    height: 30px;
-    background-color: #F33F3F;
-    color: #000000;           
-    text-align: center;
-    margin-top: 20px;
-    border-radius: 5px;
+    padding: 6px 12px;
+    border-radius: 6px;
     cursor: pointer;
-    font-family: Arial, sans-serif;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+.btn-watchlist:hover {
+    border-color: #F33F3F;
+    color: #F33F3F;
+}
+
+/* Nút Remove màu đỏ nằm gọn gàng bên dưới */
+.remove-btn {
+    margin-top: 12px;
+    width: 100%;
+    height: 34px;
+    background-color: #f33f3f20; /* Màu đỏ trong suốt nhẹ */
+    border: 1px solid #F33F3F;
+    color: #F33F3F;
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.remove-btn:hover {
+    background-color: #F33F3F; /* Đỏ rực lên khi hover */
+    color: #000000;
+}
+.trash-icon {
+    width: 16px;
+    height: 16px;
 }
 
 .modal-overlay {
-    display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85); /* Tối sâu hơn */
+    display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+/* Để bật mở bằng JS, bạn chỉ cần add class .open thay vì đổi display */
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .modal-content {
@@ -416,57 +346,154 @@
     padding: 24px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     font-family: Arial, sans-serif;
+    animation: scaleUp 0.25s ease-out;
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .modal-close-btn {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 32px;
-    height: 32px;
+    top: 15px;
+    right: 15px;
+    width: 28px;
+    height: 28px;
     border: none;
     border-radius: 50%;
-    background: #f33f3f;
-    color: #000000;
-    cursor: pointer;
-    font-size: 20px;
-    line-height: 1;
-}
-
-.watchlist-options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 16px;
-}
-
-.watchlist-select-btn {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #444444;
-    border-radius: 8px;
-    background: #2e2d2d;
+    background: #222222;
     color: #ffffff;
     cursor: pointer;
-    text-align: left;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+.modal-close-btn:hover {
+    background: #F33F3F;
+    color: #000000;
 }
 
-.watchlist-select-btn:hover {
-    border-color: #f33f3f;
-    transform: translateY(-1px);
+.created-watchlist-card {
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;   
+    justify-content: space-between; 
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.watchlist-select-btn:focus {
-    outline: 2px solid #f33f3f;
-    outline-offset: 2px;
+.movie-details-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: 21%;
+    width: calc(100% - 21%);
+    padding: 20px 32px 56px;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+/* Movie details header */
+.movie-details-header {
+    width: min(100%, 980px);
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+.movie-details-header h2 {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 0.2px;
+    margin-bottom: 6px;
+}
+
+.movie-details-header p {
+    color: rgba(255,255,255,0.78);
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 720px;
+}
+
+
+.add-watchlist-btn {
+    margin-top: 12px;
+    width: 120px;
+    height: 30px;
+    background-color: #f33f3f20; /* Màu đỏ trong suốt nhẹ */
+    border: 1px solid #F33F3F;
+    color: #F33F3F;
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.add-watchlist-btn:hover {
+    background-color: #F33F3F; /* Đỏ rực lên khi hover */
+    color: #000000;
+}
+
+.movie-details-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 360px 1fr; /* poster | info */
+    gap: 0;
+    align-items: stretch;
+    width: min(100%, 980px);
+    background: linear-gradient(180deg,#151515 0%, #0f0f0f 100%);
+    border: 1px solid rgba(243,63,63,0.06);
+    overflow: hidden;
+    margin: 20px auto 24px;
+    box-shadow: 0 22px 55px rgba(0,0,0,0.6);
+    box-sizing: border-box;
 }
 
 .movie-details-poster {
-    width: 300px;
-    height: 350px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+}
+@media (max-width: 800px) {
+    .movie-details-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px 16px 40px;
+    }
+
+    .movie-details-card {
+        grid-template-columns: 1fr;
+    }
+    .movie-details-poster {
+        min-height: 340px;
+    }
+    .movie-details-info {
+        padding: 18px;
+    }
+}
+
+
+.movie-details-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 26px 28px;
+    gap: 12px;
 }
 
 .movies-details-container {
@@ -474,34 +501,337 @@
     flex-direction: column;
 }
 
-.movie-details-card {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 320px;
-    height: 350px;
-    background-color: #2e2d2d;
-    border-radius: 10px;
-    margin: 20px auto;
-    gap: 30px;
+.movie-details-title {
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0 0 6px 0;
 }
 
-.movie-details-info {
+.movie-meta {
+    display: flex;
+    gap: 12px;
+    color: rgba(255,255,255,0.78);
+    font-size: 14px;
+}
+
+.movie-details-overview {
+    color: rgba(255,255,255,0.88);
+    margin-top: 8px;
+    line-height: 1.6;
+}
+
+.movie-details-genres {
+    color: rgba(255,255,255,0.8);
+}
+
+.movie-details-add-watchlist {
+    margin-top: 12px;
+    width: 100%;
+}
+
+.movie-details-add-watchlist .add-watchlist-btn {
+    width: 160px;
+    height: 40px;
+    background: linear-gradient(90deg, #F33F3F 0%, #d62c2c 100%);
+    color: #000000;
+    border: none;
+    box-shadow: 0 10px 20px rgba(243,63,63,0.12);
+}
+
+.watchlist-options {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 10px;               /* Khoảng cách vừa phải giữa các hàng */
+    margin-top: 20px;
+    width: 100%;
+    max-height: 240px;       
+    overflow-y: auto;        /* Tự động xuất hiện thanh cuộn mượt nếu danh sách quá dài */
+    padding-right: 4px;      /* Khoảng cách để thanh cuộn không đè vào nút */
+}
+
+/* Tùy chỉnh thanh cuộn (scrollbar) cho tinh tế, không bị thô */
+.watchlist-options::-webkit-scrollbar {
+    width: 6px;
+}
+.watchlist-options::-webkit-scrollbar-thumb {
+    background-color: #333333;
+    border-radius: 3px;
+}
+
+/* ===== MODAL: style chọn watchlist (Dark neumorphism) ===== */
+.watchlist-select-btn {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 63, 63, 0.35);
+    background: #141414;
     color: #ffffff;
-    font-family: Arial, sans-serif;
-    margin: 20px auto;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+    box-shadow: 6px 6px 14px rgba(0,0,0,0.45), -6px -6px 14px rgba(255,255,255,0.03);
+    outline: none;
 }
 
-.watchlist-name {
+.watchlist-select-btn:hover {
+    transform: translateY(-1px);
+    border-color: rgba(255, 63, 63, 0.7);
+    background: #1a1a1a;
+    box-shadow: 8px 8px 18px rgba(0,0,0,0.55), -8px -8px 18px rgba(255,255,255,0.05);
+}
+
+.watchlist-select-btn:active {
+    transform: translateY(0px) scale(0.99);
+}
+
+.modal-content {
+    /* neumorphism nhẹ + tinh chỉnh layout */
+    border-radius: 16px;
+    padding: 26px;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: 0.2px;
+}
+
+.modal-content p {
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* focus cho accessibility */
+.watchlist-select-btn:focus {
+    border-color: rgba(255, 63, 63, 0.95);
+}
+
+/* thêm hiệu ứng modal mượt hơn (Dark neumorphism) */
+.modal-overlay {
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    animation: modalPop 0.25s ease-out;
+}
+
+@keyframes modalPop {
+    from {
+        transform: translateY(10px) scale(0.98);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Nút add-to-watchlist (đề xuất làm nổi bật khi bấm) */
+.add-watchlist-btn {
+    box-shadow: 0 12px 22px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.add-watchlist-btn:hover {
+    box-shadow: 0 16px 26px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(-1px);
+}
+
+
+.watchlist-form {
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+    margin: 10px auto;
+    font-family: Arial, sans-serif;
+}
+
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+
+
+.watchlist-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 16px;
+
+}
+
+.watchlist-form input[type="text"], .watchlist-form textarea {
+    width: 100%;
+    background-color: #121212; /* Nền ô nhập tối hơn nền form */
+    border: 1px solid #444444;    /* Viền mỏng màu xám */
+    border-radius: 6px;           /* Bo góc nhẹ */
+    padding: 12px;
+    color: #ffffff;               /* Chữ gõ vào màu trắng */
+    font-size: 15px;
+    box-sizing: border-box;       /* Đảm bảo width 100% không bị tràn viền */
+    outline: none;
+    transition: border-color 0.3s ease;
+
+}
+
+.watchlist-form textarea {
+    resize: vertical;
+    height: 100px;
+
+}
+
+.watchlist-form input:focus,
+.watchlist-form textarea:focus {
+    border-color: #e50914; /* Viền chuyển đỏ nhẹ khi focus */
+
+}
+
+.error-msg {
     color: #ffffff;
     font-size: 15px;
+    margin-top: 5px;
     font-weight: bold;
-    margin-bottom: 10px;
-    text-decoration: none;
+}
+
+
+.create-watchlist-form {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+
+}
+
+.create-watchlist-section-header {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 900;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+
+}
+
+.create-watchlist-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: min(100%, 980px);
+    margin-left: 21%;
+    padding: 40px 32px 56px;
+    min-height: 100vh;
+
+}
+
+.create-watchlist-content .create-watchlist-section-header p {
+    color: rgba(255,255,255,0.78);
+    font-size: 14px;
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.watchlist-form {
+    background: linear-gradient(180deg, #171717 0%, #111111 100%);
+    padding: 28px;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 760px;
+    margin: 18px auto 0;
+    border: 1px solid rgba(243,63,63,0.12);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+}
+
+.form-group {
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.create-button {
+    width: 100%;
+    max-width: 180px;
+    height: 44px;
+    margin-top: 6px;
+    border-radius: 12px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #F33F3F 0%, #d62c2c 100%);
+    color: #000000;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 12px 22px rgba(243,63,63,0.14);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+
+}
+
+.create-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 28px rgba(243,63,63,0.18);
+    filter: brightness(1.03);
+}
+
+.watchlist-form input[type="text"], .watchlist-form textarea {
+    width: 100%;
+    background-color: #121212;
+    border: 1px solid #343434;
+    border-radius: 12px;
+    padding: 14px 14px;
+    color: #ffffff;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+.watchlist-form input[type="text"]:focus, .watchlist-form textarea:focus {
+    border-color: rgba(243,63,63,0.9);
+    box-shadow: 0 0 0 3px rgba(243,63,63,0.08);
+    transform: translateY(-1px);
+}
+
+.watchlist-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.92);
+    font-size: 15px;
+}
+
+.watchlist-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.smile-icon {
+    width: 50px;              /* Kích thước icon tùy bạn chỉnh */
+    height: auto;
+    
+    margin-top: auto;         /* Tự động tạo khoảng trống phía trên để đẩy chính nó xuống đáy */   /* Khoảng cách an toàn với mép dưới cùng màn hình */
+    
+    transition: transform 0.2s;
+}
+
+.smile-icon:hover {
+    transform: translateY(-3px); /* Hiệu ứng bay lên nhẹ khi hover */
 }

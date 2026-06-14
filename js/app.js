@@ -50,12 +50,13 @@ async function renderMovieDetails(movieId) {
                 <span class = "movie-details-genres">Genres: ${genres}</span>
                 <p class = "movie-details-overview">${movie.overview}</p>
             </div>
-        </div>
-        <div class = "movie-details-add-watchlist">
-            <button id = "add-watchlist-btn" class = "add-watchlist-btn">Add to Watchlist</button>
+            
+            <div class = "movie-details-add-watchlist">
+                <button id = "add-watchlist-btn" class = "add-watchlist-btn">Add to Watchlist</button>
+            </div>
+
         </div>
         <div id="watchlist-modal" class="modal-overlay">
-    
             <div class="modal-content">
                 <button id="close-btn" class="modal-close-btn">&times;</button>
                 
@@ -89,16 +90,17 @@ function renderWatchlistOptions() {
 function openWatchlistModal() {
     const watchlistModal = document.getElementById('watchlist-modal');
     if (watchlistModal) {
-        watchlistModal.style.display = 'flex';
+        watchlistModal.classList.add('open');
     }
 }
 
 function closeWatchlistModal() {
     const watchlistModal = document.getElementById('watchlist-modal');
     if (watchlistModal) {
-        watchlistModal.style.display = 'none';
+        watchlistModal.classList.remove('open');
     }
 }
+
 
 function handleMovieDetailsClick(event) {
     if (!movieDetailsContainer) return;
@@ -236,17 +238,19 @@ function renderMovies(movies) {
         //Rating
         const rating = movie.vote_average ? `${movie.vote_average}/10` : 'N/A';
         const movieCard = `
-            <div class = "movie-card">
-                <div class = "btn-watchlist" id = "watchlist-btn-${movie.id}">
-                    <a href = "moviedetails.html?movieId=${movie.id}" class = "movie-detail-link">
-                        <img src="assets/ribbon.png" alt="Add to Watchlist" class = "ribbon-icon">
+            <div class="movie-card">
+                <div class="poster-wrapper">
+                    <a href="moviedetails.html?movieId=${movie.id}" class="movie-detail-link">
+                        <img src="${posterPath}" alt="${movie.title} poster" class="movie-poster">
                     </a>
                 </div>
-                <img src="${posterPath}" alt="${movie.title} poster" class = "movie-poster">
-                <div class = "movie-info">
-                    <h3 class = "movie-title">${movie.title}</h3>
-                    <span class = "release-date">Release: ${releaseDate}</span>
-                    <span class = "rating">Rating: ${rating}</span>
+                
+                <div class="movie-info">
+                    <h3 class="movie-title">
+                        <a href="moviedetails.html?movieId=${movie.id}" class="movie-title-link">${movie.title}</a>
+                    </h3>
+                    <span class="release-date">Release: ${releaseDate}</span>
+                    <span class="rating">Rating: ${rating}</span>
                 </div>
             </div>
         `;
@@ -282,19 +286,18 @@ function renderWatchlist() {
         const rating = movie.vote_average ? `${movie.vote_average}/10` : 'N/A';
         const movieCard = `
             <div class = "movie-card">
-                <div class = "btn-watchlist" id = "watchlist-btn-${movie.id}">
-                    <img src="assets/ribbon.png" alt="Add to Watchlist" class = "ribbon-icon">
-                </div>
                 <img src="${posterPath}" alt="${movie.title} poster" class = "movie-poster">
                 <div class = "movie-info">
                     <h3 class = "movie-title">${movie.title}</h3>
                     <span class = "release-date">Release: ${releaseDate}</span>
                     <span class = "rating">Rating: ${rating}</span>
                 </div>
+
                 <div class = "remove-btn" id = "remove-btn-${movie.id}"> 
-                    <img src = "assets/Trash.png" alt = "remove from watchlist" class = "trash-icon">
+                    Remove
                 </div>
             </div>
+            
         `;
         watchlistgrid.innerHTML += movieCard;
     });
