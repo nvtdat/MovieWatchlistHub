@@ -6,6 +6,7 @@ import {getWatchList, addToWatchList, removeFromWatchList, getListOfWatchLists,
 const moviegrid = document.getElementById('movie-grid');
 const statusContainer = document.getElementById('status-container');
 const searchInput = document.getElementById('search-input');
+const sidebarSearchInput = document.querySelector('.search-bar');
 const searchButton = document.getElementById('search-button');
 const watchlistgrid = document.getElementById('watchlist-container');
 const createWatchlistForm = document.getElementById('create-watchlist-form');
@@ -15,6 +16,49 @@ const createdWatchlistContainer = document.getElementById('created-watchlist');
 const movieDetailsContainer = document.getElementById('movie-details-container');
 
 let currentMovieDetails = null;
+const debouncedSearch = debounce((query, sourceInput) => {
+    handleSearchQuery(query, sourceInput);
+}, 300);
+
+function getSearchQueryFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('q') || '';
+}
+
+function syncSearchInputs(query, sourceInput) {
+    [searchInput, sidebarSearchInput].forEach(input => {
+        if (input && input !== sourceInput) {
+            input.value = query;
+        }
+    });
+}
+
+async function handleSearchQuery(query, sourceInput) {
+    const trimmedQuery = query.trim();
+
+    if (!moviegrid) {
+        if (trimmedQuery) {
+            window.location.href = `index.html?q=${encodeURIComponent(trimmedQuery)}`;
+        }
+        return;
+    }
+
+    syncSearchInputs(trimmedQuery, sourceInput);
+
+    if (statusContainer) {
+        statusContainer.innerHTML = trimmedQuery
+            ? '<p class = "loading-msg">Searching movies...</p>'
+            : '<p class = "loading-msg">Loading popular movies...</p>';
+    }
+
+    const movies = trimmedQuery ? await searchMovies(trimmedQuery) : await getPopularMovies();
+
+    if (statusContainer) {
+        statusContainer.innerHTML = '';
+    }
+
+    renderMovies(movies);
+}
 
 //Hàm xóa Watchlist khỏi localStorage khi người dùng xóa watchlist
 function handleDeleteWatchList(event) {
@@ -218,26 +262,7 @@ function handleCreateWatchList(event) {
 async function handleSearchButton(){
     if(!searchInput) return;
 
-    const query = searchInput.value.trim();
-
-    if(query === '') {
-        const popularMovies = await getPopularMovies();
-        renderMovies(popularMovies);
-        return;
-    }
-    //Hiện trạng thái tìm kiếm khi người dùng nhập truy vấn
-    if(statusContainer) {
-        statusContainer.innerHTML = '<p class = "loading-msg">Searching movies...</p>';
-    }
-
-    const movies = await searchMovies(query);
-
-    //Xóa thông báo tìm kiếm sau khi lấy danh sách phim
-    if(statusContainer) {
-        statusContainer.innerHTML = '';
-    }
-    //Render danh sách phim dựa trên kết quả tìm kiếm
-    renderMovies(movies);
+    await handleSearchQuery(searchInput.value, searchInput);
 }
 
 function renderMovies(movies) {
@@ -321,23 +346,50 @@ function renderWatchlist() {
     });
 }
 async function initApp() {
-    
-    if(statusContainer) {
-        statusContainer.innerHTML = '<p class = "loading-msg">Loading popular movies...</p>';
+    const initialSearchQuery = getSearchQueryFromURL();
+
+    if (searchInput && initialSearchQuery) {
+        searchInput.value = initialSearchQuery;
     }
 
-    //Get popular movies from TMDB API
-    const movies = await getPopularMovies();
-    //Lưu trữ danh sách phim hiện tại để sử dụng khi thêm vào watchlist
-    //Clear loading message
-    if(statusContainer) {
-        statusContainer.innerHTML = '';
+    if (sidebarSearchInput && initialSearchQuery) {
+        sidebarSearchInput.value = initialSearchQuery;
     }
 
-    renderMovies(movies);
+    if (moviegrid) {
+        await handleSearchQuery(initialSearchQuery, null);
+    }
 
     if(searchButton) {
         searchButton.addEventListener('click', handleSearchButton);
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (event) => {
+            debouncedSearch(event.currentTarget.value, searchInput);
+        });
+
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                handleSearchQuery(searchInput.value, searchInput);
+            }
+        });
+    }
+
+    if (sidebarSearchInput) {
+        sidebarSearchInput.addEventListener('input', (event) => {
+            if (moviegrid) {
+                debouncedSearch(event.currentTarget.value, sidebarSearchInput);
+            }
+        });
+
+        sidebarSearchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                handleSearchQuery(sidebarSearchInput.value, sidebarSearchInput);
+            }
+        });
     }
 
     if(createWatchlistForm) {
