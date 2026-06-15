@@ -66,3 +66,12 @@ export function removeFromWatchList(movieId, listId) {
     //Lưu lại danh sách đã được cập nhật vào localStorage
     localStorage.setItem(WATCHLISTS_KEY, JSON.stringify(watchlists));
 }
+
+//Hàm xóa một watchlist theo id
+export function deleteWatchList(listId) {
+    const watchlists = getListOfWatchLists();
+    //Lọc bỏ watchlist có id cần xóa
+    const updatedWatchlists = watchlists.filter(list => list.id !== parseInt(listId));
+    //Lưu lại mảng đã lọc vào localStorage
+    localStorage.setItem(WATCHLISTS_KEY, JSON.stringify(updatedWatchlists));
+}

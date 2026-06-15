@@ -118,22 +118,10 @@ body, .index-body, .watchlist-body {
     margin: 20px auto;
 }
 
-/* Danh sách tên watchlist ở sidebar */
-.watchlist-name {
-    display: block;
-    color: #aaaaaa;
-    font-size: 15px;
-    text-decoration: none;
-    margin: 12px 0;
-    transition: color 0.2s;
-}
 .watchlist-name:hover {
     color: #ffffff;
 }
 
-/* ==========================================
-   3. HERO SECTION & THANH SEARCH CHÍNH (GIỮA MÀN HÌNH)
-   ========================================== */
 .hero-section {
     width: 100%;
     max-width: 1200px;
@@ -272,9 +260,7 @@ body, .index-body, .watchlist-body {
     display: block;
 }
 
-/* ==========================================
-   5. CÁC NÚT BẤM CHỨC NĂNG (REMOVE, INTERACTION)
-   ========================================== */
+
 /* Nút bấm Lưu/Xóa chung định dạng */
 .btn-watchlist, .create-button {
     background-color: #222222;
@@ -834,4 +820,116 @@ body, .index-body, .watchlist-body {
 
 .smile-icon:hover {
     transform: translateY(-3px); /* Hiệu ứng bay lên nhẹ khi hover */
+}
+
+
+.sidebar-watchlist-item {
+    display: flex;
+    align-items: center;       /* Căn giữa tên danh sách và dấu x theo chiều dọc */
+    justify-content: space-between; /* Đẩy cụm chữ sang trái, nút xóa sang phải tuyệt đối */
+    width: 100%;
+    height: 25px;              /* Chiều cao cố định cho mỗi dòng lệnh */
+    padding: 0 12px;           /* Khoảng đệm bên trong khối hover */
+    border-radius: 6px;        /* Bo góc nhẹ cho giống Netflix */
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-watchlist-item:hover {
+    background-color: #161616; /* Màu nền xám sẫm tinh tế */
+}
+
+
+.created-watchlist-card {
+    flex: 1;                   /* Ép khối này giãn rộng tối đa để đẩy nút xóa về rìa phải */
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+
+.watchlist-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    align-items: center;
+}
+
+
+.watchlist-name {
+    color: #cccccc;            
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;         
+    margin: 0;                 
+    padding: 0;
+    
+    /* Cơ chế an toàn: Tên quá dài tự động thêm dấu "..." */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;         
+
+   line-height: 25px;          
+}
+
+/* Khi di chuột vào vùng hàng thì chữ tự động sáng trắng lên */
+.sidebar-watchlist-item:hover .watchlist-name {
+    color: #ffffff;
+}
+
+/* 5. NÚT XÓA DẤU NHÂN (MẶC ĐỊNH ẨN) */
+.sidebar-delete-btn {
+    background: transparent;
+    border: none;
+    color: #555555;            /* Màu tối để tạm ẩn mình */
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 0 4px 8px;    /* Tạo khoảng cách đệm nhỏ với phần chữ bên trái */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;            /* Không cho nút x bị co méo */
+    
+    opacity: 0;                /* 🔴 MẶC ĐỊNH ẨN GIẤU */
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+/* Khi di chuột vào vùng .sidebar-watchlist-item thì nút xóa mới hiện ra */
+.sidebar-watchlist-item:hover .sidebar-delete-btn {
+    opacity: 1;                /* 🟢 HIỆN LÊN RÕ NÉT */
+}
+
+/* Khi chỉ đích danh chuột vào dấu × thì chuyển đỏ rực */
+.sidebar-delete-btn:hover {
+    color: #f33f3f;
+}
+
+#created-watchlist {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    padding: 0 8px;            /* Chừa một khoảng nhỏ bên phải cho thanh cuộn */
+    box-sizing: border-box;
+
+    /* 🌟 BÍ QUYẾT XỬ LÝ KHI QUÁ NHIỀU LIST: */
+    max-height: calc(100vh - 320px); /* Giới hạn chiều cao động tùy theo màn hình */
+    overflow-y: auto;          /* Chỉ hiện thanh cuộn dọc khi danh sách bị tràn */
+    overflow-x: hidden;         /* Tuyệt đối ẩn cuộn ngang */
+}
+
+/*Thanh cuộn cho danh sách watchlist trong sidebar*/
+#created-watchlist::-webkit-scrollbar {
+    width: 6px;
+}
+
+#created-watchlist::-webkit-scrollbar-thumb {
+    background-color: #333333;
+    border-radius: 3px;
+}
+
+#created-watchlist::-webkit-scrollbar-thumb:hover {
+    background-color: #555555;
 }

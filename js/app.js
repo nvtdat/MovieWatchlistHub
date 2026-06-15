@@ -1,7 +1,7 @@
 import {getPopularMovies, searchMovies, getMovieDetails} from './tmdb.js';
 import {debounce} from './debounce.js';
 import {getWatchList, addToWatchList, removeFromWatchList, getListOfWatchLists, 
-    getWatchListById, createNewWatchList} from './localStorage.js';
+    getWatchListById, createNewWatchList, deleteWatchList} from './localStorage.js';
 
 const moviegrid = document.getElementById('movie-grid');
 const statusContainer = document.getElementById('status-container');
@@ -15,6 +15,19 @@ const createdWatchlistContainer = document.getElementById('created-watchlist');
 const movieDetailsContainer = document.getElementById('movie-details-container');
 
 let currentMovieDetails = null;
+
+//Hàm xóa Watchlist khỏi localStorage khi người dùng xóa watchlist
+function handleDeleteWatchList(event) {
+    const target = event.target.closest('.sidebar-delete-btn');
+    if(!target) return;
+    const listId = target.dataset.listId;
+    const confirmDelete = confirm('Are you sure you want to delete this watchlist? This action cannot be undone.');
+    if(confirmDelete) {
+        deleteWatchList(listId);
+        alert('Watchlist deleted successfully!');
+        renderCreatedWatchlist(getListOfWatchLists());
+    }
+}
 
 function getMovieIdFromURL() {
     const params = new URLSearchParams(window.location.search);
@@ -164,11 +177,16 @@ function renderCreatedWatchlist(watchlist) {
     }   
     watchlist.forEach(list => {
         const watchlistCard = `
-            <div class = "created-watchlist-card">
-                <a href = "watchlist.html?listId=${list.id}" class = "watchlist-link">
-                    <h3 class = "watchlist-name">${list.name}</h3>
-                </a>
+        <div class = "sidebar-watchlist-list">
+            <div class = "sidebar-watchlist-item">
+                <div class = "created-watchlist-card">
+                    <a href = "watchlist.html?listId=${list.id}" class = "watchlist-link">
+                        <h3 class = "watchlist-name">${list.name}</h3>
+                    </a>
+                </div>
+                <button class="sidebar-delete-btn" data-list-id="${list.id}" title="Delete this list">×</button>
             </div>
+        </div>
         `;
         createdWatchlistContainer.innerHTML += watchlistCard;
     }); 
@@ -365,7 +383,10 @@ async function initApp() {
         });
     }
 
-    
+    if(createdWatchlistContainer) {
+        createdWatchlistContainer.addEventListener('click', handleDeleteWatchList);
+    }
+
 
 }
 document.addEventListener('DOMContentLoaded', initApp);
